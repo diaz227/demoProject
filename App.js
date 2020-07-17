@@ -1,21 +1,32 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { stackNavigator } from "react-navigation";
+import LoginScreen from "./src/screens/LoginScreen";
+import UserList from "./src/screens/UserList";
+import ContactList from "./src/screens/ContactList";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>First React Project Text yay again!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+// need to install react navigation
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+import LandingPage from "./src/screens/LandingPage";
+
+//stack navigator decides what content shows up on screen at any given time
+
+// This is a tool in a react library called react navigation
+// used to show different screens to users
+
+const navigator = createStackNavigator(
+  {
+    Land: LandingPage,
+    Login: LoginScreen,
+    User: UserList,
+    Contact: ContactList,
   },
-});
+  {
+    headerMode: "none",
+  },
+
+  { initialRouteName: "Land" } //"Home",}
+);
+
+export default createAppContainer(navigator);
